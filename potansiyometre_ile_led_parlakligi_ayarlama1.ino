@@ -13,7 +13,7 @@ void loop()
 {
   Serial.println(pot2);
   pot1=analogRead(pot);
-  pot2=map(pot1,0,1023,0,255);
+  pot2=map(pot1,0,1023,0,255);//map fonksiyonu pot1 değer aralığını 0-1023 ten 0-255 aralığına orantılı olarak dönüştürür
   
   delay(100);
   analogWrite(led,pot2);
