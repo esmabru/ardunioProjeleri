@@ -37,3 +37,26 @@ void loop()
     delay(100);
   }
 }
+//Potansiyometre ile servo motor kontrolü
+#include<Servo.h>
+
+Servo motor;
+
+int pot=A0;
+int potdeger;
+
+void setup()
+{
+ motor.attach(9);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  potdeger=analogRead(pot);
+  //map fonk. ile 0-1023 aralığını servo motorun dönme aralığı olan 0-180 e döüştürüyoruz
+  potdeger=map(potdeger,0,1023,0,180);
+  motor.write(potdeger);
+  Serial.println(potdeger);
+  delay(15);
+}
