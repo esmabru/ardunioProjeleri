@@ -9,7 +9,7 @@ void setup()
 }
 void loop()
 {
-  sg90.write(92);
+  sg90.write(92);//92 derece dönme komutu
  
 }
 //Sürekli dönen servo motor kodu
@@ -60,3 +60,83 @@ void loop()
   Serial.println(potdeger);
   delay(15);
 }
+//LDR ile servo motor kontrolü
+#include<Servo.h>
+Servo motor;
+
+int ldr=A0;
+int ldrdeger;
+int aydinlikdeger=500;
+int aci=0;
+
+void setup()
+{
+  motor.attach(13);
+  Serial.begin(9600);
+  pinMode(ldr,INPUT);
+  motor.write(0);
+}
+
+void loop()
+{
+  ldrdeger=analogRead(ldr);
+  Serial.println(ldrdeger);
+  
+  if(ldrdeger<aydinlikdeger){
+    motor.write(180);
+    delay(300);
+  }
+  else{
+    motor.write(0);
+  delay(300);
+  }
+}
+//LDR Sensör ile Işığa Duyarlı Servo Motor
+#include<Servo.h>
+
+Servo motor;
+
+int ldr=A0;
+int ldrdeger;
+int aci=0;
+
+void setup()
+{
+  pinMode(ldr,INPUT);
+  Serial.begin(9600);
+  motor.attach(13);
+  motor.write(aci);
+}
+
+void loop()
+{
+  ldrdeger=analogRead(ldr);
+  ldrdeger=map(ldrdeger,0,1023,0,180);
+  motor.write(ldrdeger);
+  Serial.println(ldrdeger);
+  delay(15);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
