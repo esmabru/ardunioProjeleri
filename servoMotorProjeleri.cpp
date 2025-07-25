@@ -116,7 +116,49 @@ void loop()
   Serial.println(ldrdeger);
   delay(15);
 }
+//Çöp kutusu
+#include <Servo.h>
 
+Servo motor;
+int trigPin=7;
+int echoPin=8;
+
+void setup()
+{
+  motor.attach(9);
+  pinMode(trigPin,OUTPUT);
+  pinMode(echoPin,INPUT);
+  motor.write(0);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  long sure;
+  float mesafe;
+
+  digitalWrite(trigPin,LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin,LOW);
+
+  sure=pulseIn(echoPin,HIGH);
+  mesafe = (sure * 0.034) / 2;
+  
+
+  Serial.print("Mesafe: ");
+  Serial.print(mesafe);
+  Serial.println(" cm");
+
+  if (mesafe<30) {
+    motor.write(180);
+  } 
+  else {
+    motor.write(0);
+    delay(10);
+  }
+}
 
 
 
