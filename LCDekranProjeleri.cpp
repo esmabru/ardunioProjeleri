@@ -79,7 +79,7 @@ void loop()
 {
   //sıcaklık ölçme işelemi
  sicaklik=((analogRead(sicaklikPin)*4.88)-500)/10;
-  
+   
  lcd.setCursor(0,0);
  lcd.print("Sicaklik");
  lcd.setCursor(0,1);
