@@ -214,7 +214,71 @@ void loop() {
   else if(sayac == 2) saga();
   else if (sayac == 3) flash();
 }
+//1 Butona Her Bastığımızda 3 Led'i Farklı Şekilde Yakma
+int kirmizi=3;
+int yesil=4;
+int mavi=6;
+int buton=5;
+int butonDurum=0;
+int deger=0;
 
+void setup()
+{
+  pinMode(kirmizi,OUTPUT);
+  pinMode(yesil,OUTPUT);
+  pinMode(mavi,OUTPUT);
+  pinMode(buton,INPUT);
+}
+
+void loop()
+{
+  butonDurum=digitalRead(buton);
+  
+  if(butonDurum==HIGH && deger==0){
+    digitalWrite(kirmizi, HIGH);
+    digitalWrite(yesil, LOW);
+    digitalWrite(mavi, LOW);
+    deger=1;
+    delay(10);
+  }
+  if(butonDurum==LOW && deger==1){
+    deger=2;
+    delay(10);
+  }
+  if(butonDurum==HIGH && deger==2){
+    digitalWrite(kirmizi, HIGH);
+    digitalWrite(yesil, HIGH);
+    digitalWrite(mavi, LOW);
+    deger=3;
+    delay(10);
+  }
+ if(butonDurum==LOW && deger==3){
+    deger=4;
+    delay(10);
+  } 
+if(butonDurum==HIGH && deger==4){
+    digitalWrite(kirmizi, HIGH);
+    digitalWrite(yesil, HIGH);
+    digitalWrite(mavi, HIGH);
+    deger=5;
+    delay(10);
+  }  
+if(butonDurum==LOW && deger==5){
+    deger=6;
+    delay(10);
+  } 
+ if(butonDurum==HIGH && deger==6){
+    digitalWrite(kirmizi, LOW);
+    digitalWrite(yesil, LOW);
+    digitalWrite(mavi, LOW);
+    deger=7;
+    delay(10);
+  }   
+if(butonDurum==LOW && deger==7){
+    deger=0;
+    delay(10);
+  }   
+}
 
 
 
