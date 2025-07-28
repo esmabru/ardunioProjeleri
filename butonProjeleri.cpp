@@ -141,3 +141,80 @@ void loop()
   digitalWrite(led,LOW); 
   delay(1000); }
 }
+//2 Buton İle 3 Led'i Farklı Şekilde Yakma
+int button1=2;
+int button2=3;
+int kirmizi=4;
+int yesil=5;
+int mavi=6;
+int t=900;// LED’ler arası kayma süresi
+int sayac=0;
+
+void setup() {
+  pinMode(kirmizi,OUTPUT);
+  pinMode(yesil,OUTPUT);
+  pinMode(mavi,OUTPUT);
+  pinMode(button1,INPUT);
+  pinMode(button2,INPUT);
+}
+
+void sola(){
+  digitalWrite(mavi,1);
+  digitalWrite(yesil,0);
+  digitalWrite(kirmizi,0);
+  delay(t);     
+  digitalWrite(mavi,0);
+  digitalWrite(yesil,1);
+  digitalWrite(kirmizi,0);
+  delay(t);  
+  digitalWrite(mavi,0);
+  digitalWrite(yesil,0);
+  digitalWrite(kirmizi,1);
+  delay(t);
+}
+
+void saga() {
+  digitalWrite(mavi,0);
+  digitalWrite(yesil,0);
+  digitalWrite(kirmizi,1);
+  delay(t);     
+  digitalWrite(mavi,0);
+  digitalWrite(yesil,1);
+  digitalWrite(kirmizi,0);
+  delay(t);  
+  digitalWrite(mavi,1);
+  digitalWrite(yesil,0);
+  digitalWrite(kirmizi,0);
+  delay(t);    
+}
+
+void flash() {
+  digitalWrite(mavi,0);
+  digitalWrite(yesil,0);
+  digitalWrite(kirmizi,0);
+  delay(t);     
+  digitalWrite(mavi,1);
+  digitalWrite(yesil,1);
+  digitalWrite(kirmizi,1);
+  delay(t);      
+}
+
+void loop() {
+  if(digitalRead(button1)== 1){ // Buton1’e basılırsa sola
+    sayac=1;
+  }
+  else if(digitalRead(button2) == 1) { // Buton2’ye basılırsa sağa
+    sayac = 2;
+  }
+  else{ // Hiçbiri basılmıyorsa flash
+    sayac = 3;
+  }
+
+  if(sayac == 1) sola();
+  else if(sayac == 2) saga();
+  else if (sayac == 3) flash();
+}
+
+
+
+
