@@ -104,3 +104,40 @@ void loop()
     digitalWrite(yayay,LOW);
   }
 }
+//3 Butonla 1 Led'i Farklı Şekilde Yakma
+int led=5;
+int deger=0;
+
+void setup()
+{
+  pinMode(led,OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  deger=analogRead(A0);
+  Serial.println(deger);
+  
+  if(deger<1024 && deger>1000){
+  digitalWrite(led,HIGH);
+  delay(10000);
+  digitalWrite(led,LOW); 
+  delay(10000);  
+  }
+  if(deger<700 && deger>400){
+  digitalWrite(led,HIGH);
+  delay(3000);
+  digitalWrite(led,LOW); 
+  delay(3000);
+  }
+  if(deger<350 && deger>0){
+  digitalWrite(led,HIGH);
+  delay(1000);
+  digitalWrite(led,LOW); 
+  delay(1000);  
+  digitalWrite(led,HIGH);
+  delay(1000);
+  digitalWrite(led,LOW); 
+  delay(1000); }
+}
