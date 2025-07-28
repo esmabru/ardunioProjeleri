@@ -279,6 +279,63 @@ if(butonDurum==LOW && deger==7){
     delay(10);
   }   
 }
+// 1 Buton İle Zaman Ayarlı Led Yakma
+int kirmizi=5;
+int yesil=6;
+int mavi=7;
+int buton=8;
+int deger=0;
+int say=0;
+bool islem=false;
 
+void setup()
+{
+  pinMode(kirmizi, OUTPUT);
+  pinMode(yesil, OUTPUT);
+  pinMode(mavi, OUTPUT);
+  pinMode(buton, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+deger=digitalRead(buton);//dijital okuma yapıyor
+Serial.println(deger);
+  
+  while(deger==1){
+  delay(100);
+  say++;
+  deger=digitalRead(buton);/*butonu tekrar okuyoruz ki,while 
+  takılı kalmasın aksi halde deger değişkeni hep 1 olduğu için 
+  while sonsuz döngüye girer*/
+  islem=true;
+  }
+  Serial.println(say);
+  if(islem==true){
+  
+    if(say>0 && say<=10){//1 saniye basıldı
+      digitalWrite(kirmizi,HIGH);
+      digitalWrite(yesil,LOW);
+      digitalWrite(mavi,LOW);
+  }
+   else if (say>10 && say<=30){//2 saniye basıldı
+      digitalWrite(kirmizi,LOW);
+      digitalWrite(yesil,HIGH);
+      digitalWrite(mavi,LOW);
+  }
+    else//2 saniyeden fazla basıldı
+    {
+    digitalWrite(kirmizi,LOW);
+    digitalWrite(yesil,LOW);
+    digitalWrite(mavi,HIGH);
+    }
+    say=0;
+    islem=false;
+  }
+}
+
+
+
+ 
 
 
