@@ -1,3 +1,4 @@
+//Gaz sensörü
 int buzzer=13;
 int gazSensoru=A0;
 int deger;
