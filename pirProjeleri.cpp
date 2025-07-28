@@ -56,3 +56,32 @@ void loop()
   else
   digitalWrite(led,LOW);
 }
+//Hareket Sensörü İle Servo Motor Kontrolü
+#include<Servo.h>
+Servo motor;
+int pir=3;
+int deger=0;
+
+
+void setup()
+{
+  motor.attach(9);
+  pinMode(pir,INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  //Motor hali hazırda 0 derecede beklesin
+  motor.write(0);
+  deger=digitalRead(pir);
+  Serial.println(deger);
+
+  //Eğer hareket varsa servo motor 90 derece dönsün
+  if(deger==HIGH){
+  motor.write(90);
+   delay(2000);
+  }
+  else
+  motor.write(0);
+}
