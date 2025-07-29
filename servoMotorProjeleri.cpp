@@ -160,7 +160,47 @@ void loop()
   }
 }
 
+// 6 Tane Servo Motoru Arduinoya Bağlamak
+#include<Servo.h>
+Servo motor1;
+Servo motor2;
+Servo motor3;
+Servo motor4;
+Servo motor5;
+Servo motor6;
+  
+int aci=0;  
+void setup()
+{
+  motor1.attach(5);
+  motor2.attach(6);
+  motor3.attach(7);
+  motor4.attach(8);
+  motor5.attach(9);
+  motor6.attach(10);
+}
 
+void loop()
+{
+  for(aci=0;aci<=180;aci++){
+     motor1.write(aci);
+     motor2.write(aci);
+     motor3.write(aci);
+     motor4.write(aci);
+     motor5.write(aci);
+     motor6.write(aci);
+    delay(15);
+  }
+  for(aci=180;aci>=0;aci--){
+     motor1.write(aci);
+     motor2.write(aci);
+     motor3.write(aci);
+     motor4.write(aci);
+     motor5.write(aci);
+     motor6.write(aci);
+    delay(15);
+  }
+}
 
 
 
