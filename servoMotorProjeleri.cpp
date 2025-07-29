@@ -201,7 +201,44 @@ void loop()
     delay(15);
   }
 }
+// 3 Tane Potansiyometre İle 3 Servo Motor Kontrolü (Robot Kol)
+#include<Servo.h>
+Servo motor1;
+Servo motor2;
+Servo motor3;
 
+int pot1=A0;
+int pot2=A1;
+int pot3=A2;
+int potdeger1;
+int potdeger2;
+int potdeger3;
+
+
+void setup()
+{
+  motor1.attach(5);
+  motor2.attach(6);
+  motor3.attach(7);
+ 
+}
+
+void loop()
+{
+  potdeger1=analogRead(pot1);
+  potdeger1=map(potdeger1,0,1024,0,180);
+  motor1.write(potdeger1);
+  
+  potdeger2=analogRead(pot2);
+  potdeger2=map(potdeger2,0,1024,0,180);
+  motor2.write(potdeger2);
+  
+  potdeger3=analogRead(pot3);
+  potdeger3=map(potdeger3,0,1024,0,180);
+  motor3.write(potdeger3);
+  
+  delay(100);
+}
 
 
 
