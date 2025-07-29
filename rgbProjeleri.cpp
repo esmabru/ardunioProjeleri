@@ -52,7 +52,52 @@ void loop()
   analogWrite(yesil,yesilrandom);
   delay(100);
 }
+//RGB Led'i 3 Buton İle Farklı Renklerde Yakma
+int kirmizi=5;
+int mavi=6;
+int yesil=7;
+int buton1=8;
+int buton2=9;
+int buton3=10;
+int kirmizideger=0;
+int mavideger=0;
+int yesildeger=0;
 
+void setup()
+{
+  pinMode(kirmizi, OUTPUT);
+  pinMode(mavi, OUTPUT);
+  pinMode(yesil, OUTPUT);
+  pinMode(buton1, INPUT);
+  pinMode(buton2, INPUT);
+  pinMode(buton3, INPUT);
+}
+
+void loop()
+{
+  if(digitalRead(buton1)==HIGH){
+    delay(15);
+    kirmizideger++;
+    if(kirmizideger>255)
+      kirmizideger=0;
+  }
+  if(digitalRead(buton2)==HIGH){
+    delay(15);
+    mavideger++;
+    if(mavideger>255)
+      mavideger=0;
+  }
+  if(digitalRead(buton3)==HIGH){
+    delay(15);
+    yesildeger++;
+    if(yesildeger>255)
+      yesildeger=0;
+  }
+  
+  analogWrite(kirmizi,kirmizideger);
+  analogWrite(mavi,mavideger);
+  analogWrite(yesil,yesildeger);  
+}
 
 
 
