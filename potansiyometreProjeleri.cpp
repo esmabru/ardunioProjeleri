@@ -102,3 +102,61 @@ void loop()
   delay(2000);
   
 } 
+
+//Potansiyometre İle 3 Led'i Farklı Şekilde Yakma
+int kirmizi=5;
+int mavi=6;
+int yesil=7;
+int pot=A0;
+int potdeger;
+void setup()
+{
+  pinMode(kirmizi, OUTPUT);
+  pinMode(mavi, OUTPUT);
+  pinMode(yesil, OUTPUT);
+  pinMode(pot, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  potdeger=analogRead(pot);
+  Serial.println(potdeger);
+  
+  if(potdeger<250){//potdeger 250 den küçükse hiçbir ledi yakma
+    digitalWrite(kirmizi,LOW);
+    digitalWrite(mavi,LOW);
+    digitalWrite(yesil,LOW);
+  }
+  if(potdeger>250){//potdeger 250 den büyükse sadece kırmızı ledi yak
+    digitalWrite(kirmizi,HIGH);
+    digitalWrite(mavi,LOW);
+    digitalWrite(yesil,LOW);
+  }
+   if(potdeger>500){//potdeger 500 den büyükse kırmızı ve mavi ledi yak
+    digitalWrite(kirmizi,HIGH);
+    digitalWrite(mavi,HIGH);
+    digitalWrite(yesil,LOW);
+  }
+  if(potdeger>750){//potdeger 750 den büyükse hepsini yak
+    digitalWrite(kirmizi,HIGH);
+    digitalWrite(mavi,HIGH);
+    digitalWrite(yesil,HIGH);
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
