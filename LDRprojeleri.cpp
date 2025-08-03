@@ -106,6 +106,44 @@ void loop()
   }  
 }
 
+//LDR Sensör İle Karanlıkta RGB Led Yakma
+int kirmizi=5;
+int mavi=6;
+int yesil=7;
+int ldr=A0;
+int ldrdeger;
+
+void setup()
+{
+  pinMode(kirmizi, OUTPUT);
+  pinMode(mavi, OUTPUT);
+  pinMode(yesil, OUTPUT);
+  pinMode(ldr, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  ldrdeger=analogRead(ldr);
+  Serial.println(ldrdeger);
+  
+  if(ldrdeger<1000 && ldrdeger>800){
+  analogWrite(kirmizi,255);
+  analogWrite(mavi,255);
+  analogWrite(yesil,255);
+  }
+  if(ldrdeger<800 && ldrdeger>600){
+  analogWrite(kirmizi,100);
+  analogWrite(mavi,100);
+  analogWrite(yesil,100);
+  }
+  if(ldrdeger<600 && ldrdeger>400){
+  analogWrite(kirmizi,100);
+  analogWrite(mavi,200);
+  analogWrite(yesil,50);
+  }
+ 
+}
 
 
 
