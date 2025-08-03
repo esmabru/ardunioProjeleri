@@ -146,6 +146,36 @@ void loop()
   
 }
 
+// Potansiyometre ile Led'leri Hız Ayarlı Yakma
+int led;
+int pot;
+
+void setup()
+{
+  Serial.begin(9600);
+  for(led=7;led>1;led--)
+  pinMode(led, OUTPUT);
+  
+}
+
+void loop()
+{
+  for(led=7;led>1;led--){
+  pot=analogRead(A0);
+  pot=map(pot,0,1023,0,1000);
+   
+  digitalWrite(led,HIGH);
+  Serial.print("led:");
+  Serial.println(led);
+  
+  Serial.print("\t");
+  Serial.print("Bekleme suresi:");
+  Serial.print(pot);
+  Serial.println("ms");
+  delay(pot);
+  digitalWrite(led,LOW);
+  } 
+}
 
 
 
