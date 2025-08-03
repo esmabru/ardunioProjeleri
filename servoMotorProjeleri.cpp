@@ -240,6 +240,128 @@ void loop()
   delay(100);
 }
 
+//Hafızalı Robot Kol Çalışması Servo Motor Mantığı
+#include<Servo.h>
+
+Servo motor1;
+Servo motor2;
+Servo motor3;
+
+int led1=8;
+int led2=9;
+int led3=10;
+int led4=11;
+int led5=12;
+
+int buton1=4;
+int buton2=3;
+
+int pot1=A0;
+int pot2=A1;
+int pot3=A2;
+
+int pot1deger;
+int pot2deger;
+int pot3deger;
+
+int pot1aci;
+int pot2aci;
+int pot3aci;
+
+int buton1deger=0;
+bool buton2deger=false;
+
+int potkayit1[]={1,1,1,1,1};
+int potkayit2[]={1,1,1,1,1};
+int potkayit3[]={1,1,1,1,1};
+
+
+void setup()
+{
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
+  pinMode(led5, OUTPUT);
+  pinMode(buton1, INPUT);
+  pinMode(buton2, INPUT);
+  
+  motor1.attach(5);
+  motor2.attach(6);
+  motor3.attach(7);
+  
+  Serial.begin(9600);
+  
+}
+
+void loop()
+{
+  // Potansiyometreleri oku ve servo açılarına çevir
+  pot1deger=analogRead(pot1);
+  pot1aci=map(pot1deger,0,1023,0,180);
+  pot2deger=analogRead(pot2);
+  pot2aci=map(pot2deger,0,1023,0,180);
+  pot3deger=analogRead(pot3);
+  pot3aci=map(pot3deger,0,1023,0,180);
+  
+  motor1.write(pot1aci);
+  motor2.write(pot2aci);
+  motor3.write(pot3aci);
+  
+   // --- Buton1 ile kayıt alma ---
+  if(digitalRead(buton1)==HIGH){
+    buton1deger++;
+    switch(buton1deger){
+     
+      case 1:
+      potkayit1[0]=pot1aci;
+      potkayit2[0]=pot2aci;
+      potkayit3[0]=pot3aci;
+      digitalWrite(led1,HIGH);
+      Serial.println("POT 1 KAYIT EDİLDİ");
+      break;  
+      case 2:
+      potkayit1[1]=pot1aci;
+      potkayit2[1]=pot2aci;
+      potkayit3[1]=pot3aci;
+      digitalWrite(led2,HIGH);
+      Serial.println("POT 2 KAYIT EDİLDİ");
+      break;  
+      case 3:
+      potkayit1[2]=pot1aci;
+      potkayit2[2]=pot2aci;
+      potkayit3[2]=pot3aci;
+      digitalWrite(led3,HIGH);
+      Serial.println("POT 3 KAYIT EDİLDİ");
+      break;  
+      case 4:
+      potkayit1[3]=pot1aci;
+      potkayit2[3]=pot2aci;
+      potkayit3[3]=pot3aci;
+      digitalWrite(led4,HIGH);
+      Serial.println("POT 4 KAYIT EDİLDİ");
+      break;  
+      case 5:
+      potkayit1[4]=pot1aci;
+      potkayit2[4]=pot2aci;
+      potkayit3[4]=pot3aci;
+      digitalWrite(led5,HIGH);
+      Serial.println("POT 5 KAYIT EDİLDİ");
+      break;  
+    }
+  }
+  
+  // --- Buton2 ile oynatma ---
+  if(digitalRead(buton2)==HIGH){
+    for(int i=0;i<5;i++){
+    motor1.write( potkayit1[i]);
+    motor2.write(potkayit2[i]);
+    motor3.write(potkayit3[i]);
+    delay(1000);  
+    }
+  }
+ delay(300); 
+}
 
 
 
