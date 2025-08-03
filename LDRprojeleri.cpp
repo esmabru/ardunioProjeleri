@@ -145,7 +145,42 @@ void loop()
  
 }
 
+//LDR ile Karanlıkta Led Yakma ve Potansiyometre İle Parlaklık Ayarı
+int led=3;
+int pot=A1;
+int ldr=A0;
+int ldrdeger;
+int potdeger;
 
+
+void setup()
+{
+  pinMode(led, OUTPUT);
+  pinMode(pot, INPUT);
+  pinMode(ldr, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  ldrdeger=analogRead(ldr);
+  
+  potdeger=map(analogRead(pot),0,1023,0,255);
+  
+  Serial.print("LDR deger: ");
+  Serial.println(ldrdeger);
+  
+  Serial.print("POT deger: ");
+  Serial.print(potdeger);
+  
+  if(ldrdeger>500){
+  analogWrite(led,potdeger);
+  }
+  else{
+    analogWrite(led,LOW);
+  }
+ delay(500);
+}
 
 
 
