@@ -118,7 +118,62 @@ void loop()
   noTone(buzzer);  
   }
 }
+//Mesafe Sensörü İle Led Yakma 
+int kirmizi=5;
+int yesil=6;
+int mavi=7;
+int trigPin=8;
+int echoPin=13;
 
+void setup()
+{
+  pinMode(kirmizi, OUTPUT);
+  pinMode(yesil, OUTPUT);
+  pinMode(mavi, OUTPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  long sure;
+  float mesafe;
+  
+ digitalWrite(trigPin,LOW);
+ delayMicroseconds(2);
+  
+ digitalWrite(trigPin,HIGH);
+ delayMicroseconds(10);
+  
+ digitalWrite(trigPin,LOW);
+
+  sure=pulseIn(echoPin,HIGH);
+  mesafe=(sure/2)/29.1;
+  
+  Serial.println(mesafe);
+  
+  if(mesafe<30){
+  digitalWrite(kirmizi,HIGH);
+  digitalWrite(yesil,HIGH);
+  digitalWrite(mavi,HIGH);
+  }
+  else if(mesafe>30 && mesafe<70){
+  digitalWrite(kirmizi,HIGH);
+  digitalWrite(yesil,HIGH);
+  digitalWrite(mavi,LOW);
+  }
+  if(mesafe>70 && mesafe<100){
+  digitalWrite(kirmizi,HIGH);
+  digitalWrite(yesil,LOW);
+  digitalWrite(mavi,LOW);
+  }
+  else{
+  digitalWrite(kirmizi,LOW);
+  digitalWrite(yesil,LOW);
+  digitalWrite(mavi,LOW);
+  }
+}
 
 
 
