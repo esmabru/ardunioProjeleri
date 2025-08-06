@@ -334,6 +334,33 @@ Serial.println(deger);
   }
 }
 
+//Butonlarla Buzzer Kullanımı
+int buton1=5;
+int buton2=6;
+int buton3=7;
+int buzzer=8;
+
+void setup()
+{
+  pinMode(buton1, INPUT);
+  pinMode(buton2, INPUT);
+  pinMode(buton3, INPUT);
+  pinMode(buzzer, OUTPUT);
+  
+}
+
+void loop()
+{
+  if(digitalRead(buton1)==HIGH){
+  tone(buzzer,1000);
+  }
+  else if(digitalRead(buton2)==HIGH){
+  tone(buzzer,500);
+  }
+  else if(digitalRead(buton3)==HIGH){
+  tone(buzzer,300);
+  }
+}
 
 
  
