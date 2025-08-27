@@ -220,6 +220,27 @@ void loop(){
   
 }
 
+//Potansiyometre ile Dc Motorun Hızını Ayarlama
+int pot=A0;
+int potDeger=0;
+int motorDeger=0;
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  potDeger=analogRead(pot);
+  motorDeger=map(potDeger,0,1023,0,255);
+  analogWrite(3,motorDeger);
+  
+  Serial.print("Potansiyometre= ");
+  Serial.print(potDeger);
+  Serial.print("\t motor= ");
+  Serial.println(motorDeger);
+  delay(2);
+}
 
 
 
