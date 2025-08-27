@@ -145,9 +145,80 @@ void loop()
   }
 }
 
+//Sıcaklık İle Fan Kontrol Etme
+#define dc1 3
+#define dc2 5
+int tmp=A0;
+int deger;
+
+void setup()
+{
+  pinMode(dc1, OUTPUT);
+  pinMode(dc2, OUTPUT);
+  pinMode(tmp, INPUT);
+  Serial.begin(9600);  
+}
+
+void loop()
+{
+  deger=analogRead(tmp);
+ Serial.println(deger);
+  
+  if(deger>200){
+    digitalWrite(dc2,HIGH);
+  }
+  else
+    digitalWrite(dc2,LOW);
+}
+
+//Butonlarla Dc Motoru İleri Geri Sürme
+#define dc1 3
+#define dc2 5
+int buton1=11;
+int buton2=12;
+int buton3=13;
+int sayac;
 
 
+void setup(){
+  pinMode(dc1, OUTPUT);
+  pinMode(dc2, OUTPUT);
+}
 
+void ileri(){
+digitalWrite(dc1,HIGH);
+digitalWrite(dc2,LOW);
+}
+void geri(){
+digitalWrite(dc1,LOW);
+digitalWrite(dc2,HIGH);
+}
+void dur(){
+digitalWrite(dc1,LOW);
+digitalWrite(dc2,LOW);
+}
+
+void loop(){
+  buton1=digitalRead(11);
+  buton2=digitalRead(12);
+  buton3=digitalRead(13);
+  
+  if(buton1==1)
+    sayac=1;
+  
+  if(buton2==1)
+    sayac=2;
+  
+  if(buton3==1)
+    sayac=3;
+  
+  if(sayac==1) ileri();
+  if(sayac==2) geri();
+  if(sayac==3) dur();
+  
+  delay(10);
+  
+}
 
 
 
