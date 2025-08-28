@@ -242,5 +242,76 @@ void loop()
   delay(2);
 }
 
+// Işık Takip Eden Robot
+#define sol_g 2
+#define sol_i 3
+#define sag_g 4
+#define sag_i 5
+int ldr1=A0;
+int ldr2=A1;
+int deger1;
+int deger2;
+void setup()
+{
+  pinMode(sol_g, OUTPUT);
+  pinMode(sol_i, OUTPUT);
+  pinMode(sag_g, OUTPUT);
+  pinMode(sag_i, OUTPUT);
+  pinMode(ldr1, INPUT);
+  pinMode(ldr2, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  deger1=analogRead(ldr1);
+  deger2=analogRead(ldr2);
+  
+  Serial.print("LDR1= ");
+  Serial.println(deger1);
+  
+  Serial.print("LDR2= ");
+  Serial.println(deger2);
+  
+  deger1=map(deger1,0,512,0,1);
+  Serial.print("LDR1map= ");
+  Serial.println(deger1);
+  
+  deger2=map(deger2,0,512,0,1);
+  Serial.print("LDR2map= ");
+  Serial.println(deger2);
+  
+  if(deger1==1 && deger2==1){
+  Serial.print("İleri");
+  digitalWrite(sol_g,HIGH);
+  digitalWrite(sol_i,LOW);
+  digitalWrite(sag_g,HIGH);
+  digitalWrite(sag_i,LOW);  
+  delay(500);
+  }
+  if(deger1==0 && deger2==1){
+  Serial.print("sağa");
+  digitalWrite(sol_g,HIGH);
+  digitalWrite(sol_i,LOW);
+  digitalWrite(sag_g,LOW);
+  digitalWrite(sag_i,HIGH);  
+  }
+  if(deger1==1 && deger2==0){
+  Serial.print("sola");
+  digitalWrite(sol_g,LOW);
+  digitalWrite(sol_i,HIGH);
+  digitalWrite(sag_g,HIGH);
+  digitalWrite(sag_i,LOW);  
+  delay(500);
+  }
+  if(deger1==0 && deger2==0){
+  Serial.print("dur"); 
+  digitalWrite(sol_g,LOW);
+  digitalWrite(sol_i,LOW);
+  digitalWrite(sag_g,LOW);
+  digitalWrite(sag_i,LOW);  
+  delay(500);
+  }
+}
 
 
